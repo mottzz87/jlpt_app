@@ -76,5 +76,35 @@
   "settingsConfirm": "Confirm",
   "settingsDarkMode": "Dark Mode",
   "settingsAutoPlay": "Auto-play Audio",
-  "settingsVersion": "Version"
+  "settingsVersion": "Version",
+  "loginWelcomeBack": "Welcome Back!",
+  "loginWeMissedYou": "We missed you",
+  "loginEmailHint": "Email Address",
+  "loginEmailRequired": "Please enter your email",
+  "loginEmailInvalid": "Please enter a valid email",
+  "loginPasswordHint": "Password",
+  "loginPasswordTooShort": "Password must be at least 6 characters",
+  "loginForgotPassword": "Forgot Password?",
+  "loginButton": "Login",
+  "loginNoAccount": "Don't have an account? Sign up",
+  "loginContinueWith": "Or continue with",
+  "registerCreateAccount": "Create Account",
+  "registerStartJourney": "Start your learning journey",
+  "registerEmailHint": "Email Address",
+  "registerEmailRequired": "Please enter your email",
+  "registerEmailInvalid": "Please enter a valid email",
+  "registerPasswordHint": "Password",
+  "registerPasswordTooShort": "Password must be at least 6 characters",
+  "registerConfirmPasswordHint": "Confirm Password",
+  "registerPasswordMismatch": "Passwords do not match",
+  "registerButton": "Sign Up",
+  "registerHaveAccount": "Already have an account? Login",
+  "registerFailure": "Registration failed: {error}",
+  "@registerFailure": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

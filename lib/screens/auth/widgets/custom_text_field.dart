@@ -141,10 +141,22 @@ class CustomTextFieldState extends State<CustomTextField> {
 
   void reset() {
     if (mounted) {
+      widget.controller.clear();
+
       setState(() {
         _errorText = null;
         _passwordStrength = widget.isPassword ? PasswordStrength.empty() : null;
+
+        if (widget.validator != null) {
+          widget.validator!('');
+        }
+
+        if (widget.onChanged != null) {
+          widget.onChanged!('');
+        }
       });
+
+      setState(() {});
     }
   }
 

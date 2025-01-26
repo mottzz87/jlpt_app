@@ -78,13 +78,24 @@ class AuthScreenState extends ConsumerState<AuthScreen>
   }
 
   void _toggleView() {
+    // 先重置当前视图的表单
+    if (isLogin) {
+      _loginKey.currentState?.resetForm();
+    } else {
+      _registerKey.currentState?.resetForm();
+    }
+
     setState(() {
+      isLogin = !isLogin;
+    });
+
+    // 等待新视图完全显示后，再次确保表单状态被重置
+    Future.delayed(const Duration(milliseconds: 350), () {
       if (isLogin) {
         _loginKey.currentState?.resetForm();
       } else {
         _registerKey.currentState?.resetForm();
       }
-      isLogin = !isLogin;
     });
   }
 

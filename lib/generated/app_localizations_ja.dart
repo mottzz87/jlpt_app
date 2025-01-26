@@ -226,4 +226,75 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get settingsVersion => 'バージョン';
+
+  @override
+  String get loginWelcomeBack => 'おかえりなさい';
+
+  @override
+  String get loginWeMissedYou => 'お待ちしておりました';
+
+  @override
+  String get loginEmailHint => 'メールアドレス';
+
+  @override
+  String get loginEmailRequired => 'メールアドレスを入力してください';
+
+  @override
+  String get loginEmailInvalid => '有効なメールアドレスを入力してください';
+
+  @override
+  String get loginPasswordHint => 'パスワード';
+
+  @override
+  String get loginPasswordTooShort => 'パスワードは6文字以上である必要があります';
+
+  @override
+  String get loginForgotPassword => 'パスワードをお忘れですか？';
+
+  @override
+  String get loginButton => 'ログイン';
+
+  @override
+  String get loginNoAccount => 'アカウントをお持ちでない方はこちら';
+
+  @override
+  String get loginContinueWith => 'または以下の方法でログイン';
+
+  @override
+  String get registerCreateAccount => 'アカウント作成';
+
+  @override
+  String get registerStartJourney => '学習の旅を始めましょう';
+
+  @override
+  String get registerEmailHint => 'メールアドレス';
+
+  @override
+  String get registerEmailRequired => 'メールアドレスを入力してください';
+
+  @override
+  String get registerEmailInvalid => '有効なメールアドレスを入力してください';
+
+  @override
+  String get registerPasswordHint => 'パスワード';
+
+  @override
+  String get registerPasswordTooShort => 'パスワードは6文字以上である必要があります';
+
+  @override
+  String get registerConfirmPasswordHint => 'パスワード（確認）';
+
+  @override
+  String get registerPasswordMismatch => 'パスワードが一致しません';
+
+  @override
+  String get registerButton => '登録';
+
+  @override
+  String get registerHaveAccount => 'すでにアカウントをお持ちの方はこちら';
+
+  @override
+  String registerFailure(String error) {
+    return '登録に失敗しました: $error';
+  }
 }

@@ -226,4 +226,75 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get settingsVersion => '版本';
+
+  @override
+  String get loginWelcomeBack => '欢迎回来';
+
+  @override
+  String get loginWeMissedYou => '我们想你了';
+
+  @override
+  String get loginEmailHint => '邮箱地址';
+
+  @override
+  String get loginEmailRequired => '请输入邮箱地址';
+
+  @override
+  String get loginEmailInvalid => '请输入有效的邮箱地址';
+
+  @override
+  String get loginPasswordHint => '密码';
+
+  @override
+  String get loginPasswordTooShort => '密码至少需要6个字符';
+
+  @override
+  String get loginForgotPassword => '忘记密码？';
+
+  @override
+  String get loginButton => '登录';
+
+  @override
+  String get loginNoAccount => '没有账号？注册';
+
+  @override
+  String get loginContinueWith => '或者使用以下方式登录';
+
+  @override
+  String get registerCreateAccount => '创建账号';
+
+  @override
+  String get registerStartJourney => '开始你的学习之旅';
+
+  @override
+  String get registerEmailHint => '邮箱地址';
+
+  @override
+  String get registerEmailRequired => '请输入邮箱地址';
+
+  @override
+  String get registerEmailInvalid => '请输入有效的邮箱地址';
+
+  @override
+  String get registerPasswordHint => '密码';
+
+  @override
+  String get registerPasswordTooShort => '密码至少需要6个字符';
+
+  @override
+  String get registerConfirmPasswordHint => '确认密码';
+
+  @override
+  String get registerPasswordMismatch => '两次输入的密码不一致';
+
+  @override
+  String get registerButton => '注册';
+
+  @override
+  String get registerHaveAccount => '已有账号？登录';
+
+  @override
+  String registerFailure(String error) {
+    return '注册失败: $error';
+  }
 }

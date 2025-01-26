@@ -76,5 +76,35 @@
   "settingsConfirm": "确认",
   "settingsDarkMode": "深色模式",
   "settingsAutoPlay": "自动播放音频",
-  "settingsVersion": "版本"
+  "settingsVersion": "版本",
+  "loginWelcomeBack": "欢迎回来",
+  "loginWeMissedYou": "我们想你了",
+  "loginEmailHint": "邮箱地址",
+  "loginEmailRequired": "请输入邮箱地址",
+  "loginEmailInvalid": "请输入有效的邮箱地址",
+  "loginPasswordHint": "密码",
+  "loginPasswordTooShort": "密码至少需要6个字符",
+  "loginForgotPassword": "忘记密码？",
+  "loginButton": "登录",
+  "loginNoAccount": "没有账号？注册",
+  "loginContinueWith": "或者使用以下方式登录",
+  "registerCreateAccount": "创建账号",
+  "registerStartJourney": "开始你的学习之旅",
+  "registerEmailHint": "邮箱地址",
+  "registerEmailRequired": "请输入邮箱地址",
+  "registerEmailInvalid": "请输入有效的邮箱地址",
+  "registerPasswordHint": "密码",
+  "registerPasswordTooShort": "密码至少需要6个字符",
+  "registerConfirmPasswordHint": "确认密码",
+  "registerPasswordMismatch": "两次输入的密码不一致",
+  "registerButton": "注册",
+  "registerHaveAccount": "已有账号？登录",
+  "registerFailure": "注册失败: {error}",
+  "@registerFailure": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 } 

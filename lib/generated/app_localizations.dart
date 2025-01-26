@@ -535,6 +535,144 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'版本'**
   String get settingsVersion;
+
+  /// No description provided for @loginWelcomeBack.
+  ///
+  /// In zh, this message translates to:
+  /// **'欢迎回来'**
+  String get loginWelcomeBack;
+
+  /// No description provided for @loginWeMissedYou.
+  ///
+  /// In zh, this message translates to:
+  /// **'我们想你了'**
+  String get loginWeMissedYou;
+
+  /// No description provided for @loginEmailHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'邮箱地址'**
+  String get loginEmailHint;
+
+  /// No description provided for @loginEmailRequired.
+  ///
+  /// In zh, this message translates to:
+  /// **'请输入邮箱地址'**
+  String get loginEmailRequired;
+
+  /// No description provided for @loginEmailInvalid.
+  ///
+  /// In zh, this message translates to:
+  /// **'请输入有效的邮箱地址'**
+  String get loginEmailInvalid;
+
+  /// No description provided for @loginPasswordHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'密码'**
+  String get loginPasswordHint;
+
+  /// No description provided for @loginPasswordTooShort.
+  ///
+  /// In zh, this message translates to:
+  /// **'密码至少需要6个字符'**
+  String get loginPasswordTooShort;
+
+  /// No description provided for @loginForgotPassword.
+  ///
+  /// In zh, this message translates to:
+  /// **'忘记密码？'**
+  String get loginForgotPassword;
+
+  /// No description provided for @loginButton.
+  ///
+  /// In zh, this message translates to:
+  /// **'登录'**
+  String get loginButton;
+
+  /// No description provided for @loginNoAccount.
+  ///
+  /// In zh, this message translates to:
+  /// **'没有账号？注册'**
+  String get loginNoAccount;
+
+  /// No description provided for @loginContinueWith.
+  ///
+  /// In zh, this message translates to:
+  /// **'或者使用以下方式登录'**
+  String get loginContinueWith;
+
+  /// No description provided for @registerCreateAccount.
+  ///
+  /// In zh, this message translates to:
+  /// **'创建账号'**
+  String get registerCreateAccount;
+
+  /// No description provided for @registerStartJourney.
+  ///
+  /// In zh, this message translates to:
+  /// **'开始你的学习之旅'**
+  String get registerStartJourney;
+
+  /// No description provided for @registerEmailHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'邮箱地址'**
+  String get registerEmailHint;
+
+  /// No description provided for @registerEmailRequired.
+  ///
+  /// In zh, this message translates to:
+  /// **'请输入邮箱地址'**
+  String get registerEmailRequired;
+
+  /// No description provided for @registerEmailInvalid.
+  ///
+  /// In zh, this message translates to:
+  /// **'请输入有效的邮箱地址'**
+  String get registerEmailInvalid;
+
+  /// No description provided for @registerPasswordHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'密码'**
+  String get registerPasswordHint;
+
+  /// No description provided for @registerPasswordTooShort.
+  ///
+  /// In zh, this message translates to:
+  /// **'密码至少需要6个字符'**
+  String get registerPasswordTooShort;
+
+  /// No description provided for @registerConfirmPasswordHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'确认密码'**
+  String get registerConfirmPasswordHint;
+
+  /// No description provided for @registerPasswordMismatch.
+  ///
+  /// In zh, this message translates to:
+  /// **'两次输入的密码不一致'**
+  String get registerPasswordMismatch;
+
+  /// No description provided for @registerButton.
+  ///
+  /// In zh, this message translates to:
+  /// **'注册'**
+  String get registerButton;
+
+  /// No description provided for @registerHaveAccount.
+  ///
+  /// In zh, this message translates to:
+  /// **'已有账号？登录'**
+  String get registerHaveAccount;
+
+  /// No description provided for @registerFailure.
+  ///
+  /// In zh, this message translates to:
+  /// **'注册失败: {error}'**
+  String registerFailure(String error);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

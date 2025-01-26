@@ -226,4 +226,75 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsVersion => 'Version';
+
+  @override
+  String get loginWelcomeBack => 'Welcome Back!';
+
+  @override
+  String get loginWeMissedYou => 'We missed you';
+
+  @override
+  String get loginEmailHint => 'Email Address';
+
+  @override
+  String get loginEmailRequired => 'Please enter your email';
+
+  @override
+  String get loginEmailInvalid => 'Please enter a valid email';
+
+  @override
+  String get loginPasswordHint => 'Password';
+
+  @override
+  String get loginPasswordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get loginForgotPassword => 'Forgot Password?';
+
+  @override
+  String get loginButton => 'Login';
+
+  @override
+  String get loginNoAccount => 'Don\'t have an account? Sign up';
+
+  @override
+  String get loginContinueWith => 'Or continue with';
+
+  @override
+  String get registerCreateAccount => 'Create Account';
+
+  @override
+  String get registerStartJourney => 'Start your learning journey';
+
+  @override
+  String get registerEmailHint => 'Email Address';
+
+  @override
+  String get registerEmailRequired => 'Please enter your email';
+
+  @override
+  String get registerEmailInvalid => 'Please enter a valid email';
+
+  @override
+  String get registerPasswordHint => 'Password';
+
+  @override
+  String get registerPasswordTooShort => 'Password must be at least 6 characters';
+
+  @override
+  String get registerConfirmPasswordHint => 'Confirm Password';
+
+  @override
+  String get registerPasswordMismatch => 'Passwords do not match';
+
+  @override
+  String get registerButton => 'Sign Up';
+
+  @override
+  String get registerHaveAccount => 'Already have an account? Login';
+
+  @override
+  String registerFailure(String error) {
+    return 'Registration failed: $error';
+  }
 }

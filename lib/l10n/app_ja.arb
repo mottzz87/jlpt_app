@@ -76,5 +76,35 @@
   "settingsConfirm": "確認",
   "settingsDarkMode": "ダークモード",
   "settingsAutoPlay": "音声自動再生",
-  "settingsVersion": "バージョン"
+  "settingsVersion": "バージョン",
+  "loginWelcomeBack": "おかえりなさい",
+  "loginWeMissedYou": "お待ちしておりました",
+  "loginEmailHint": "メールアドレス",
+  "loginEmailRequired": "メールアドレスを入力してください",
+  "loginEmailInvalid": "有効なメールアドレスを入力してください",
+  "loginPasswordHint": "パスワード",
+  "loginPasswordTooShort": "パスワードは6文字以上である必要があります",
+  "loginForgotPassword": "パスワードをお忘れですか？",
+  "loginButton": "ログイン",
+  "loginNoAccount": "アカウントをお持ちでない方はこちら",
+  "loginContinueWith": "または以下の方法でログイン",
+  "registerCreateAccount": "アカウント作成",
+  "registerStartJourney": "学習の旅を始めましょう",
+  "registerEmailHint": "メールアドレス",
+  "registerEmailRequired": "メールアドレスを入力してください",
+  "registerEmailInvalid": "有効なメールアドレスを入力してください",
+  "registerPasswordHint": "パスワード",
+  "registerPasswordTooShort": "パスワードは6文字以上である必要があります",
+  "registerConfirmPasswordHint": "パスワード（確認）",
+  "registerPasswordMismatch": "パスワードが一致しません",
+  "registerButton": "登録",
+  "registerHaveAccount": "すでにアカウントをお持ちの方はこちら",
+  "registerFailure": "登録に失敗しました: {error}",
+  "@registerFailure": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 } 

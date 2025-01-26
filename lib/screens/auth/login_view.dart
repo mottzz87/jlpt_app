@@ -6,6 +6,7 @@ import '../../providers/auth_provider.dart';
 import 'widgets/custom_text_field.dart';
 import 'widgets/social_icon_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginView extends ConsumerStatefulWidget {
   final VoidCallback onToggleView;
@@ -48,6 +49,7 @@ class LoginViewState extends ConsumerState<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Form(
       key: _formKey,
       child: Column(
@@ -60,16 +62,16 @@ class LoginViewState extends ConsumerState<LoginView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  'Welcome Back!',
-                  style: TextStyle(
+                Text(
+                  l10n.loginWelcomeBack,
+                  style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                 ),
                 Text(
-                  'welcome back we missed you',
+                  l10n.loginWeMissedYou,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black.withOpacity(0.5),
@@ -79,15 +81,15 @@ class LoginViewState extends ConsumerState<LoginView> {
                 CustomTextField(
                   key: _emailFieldKey,
                   controller: _emailController,
-                  hintText: '邮箱地址',
+                  hintText: l10n.loginEmailHint,
                   icon: Icons.email_outlined,
                   validator: (val) {
                     if (val == null || val.isEmpty) {
-                      return '请输入邮箱地址';
+                      return l10n.loginEmailRequired;
                     }
                     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                         .hasMatch(val)) {
-                      return '请输入有效的邮箱地址';
+                      return l10n.loginEmailInvalid;
                     }
                     return null;
                   },
@@ -96,7 +98,7 @@ class LoginViewState extends ConsumerState<LoginView> {
                 CustomTextField(
                   key: _passwordFieldKey,
                   controller: _passwordController,
-                  hintText: '密码',
+                  hintText: l10n.loginPasswordHint,
                   icon: Icons.lock_outline,
                   isPassword: true,
                   isPasswordVisible: _isPasswordVisible,
@@ -105,7 +107,8 @@ class LoginViewState extends ConsumerState<LoginView> {
                       _isPasswordVisible = !_isPasswordVisible;
                     });
                   },
-                  validator: (val) => val!.length < 6 ? '密码至少需要6个字符' : null,
+                  validator: (val) =>
+                      val!.length < 6 ? l10n.loginPasswordTooShort : null,
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -114,7 +117,7 @@ class LoginViewState extends ConsumerState<LoginView> {
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.black.withOpacity(0.5),
                     ),
-                    child: const Text('忘记密码？'),
+                    child: Text(l10n.loginForgotPassword),
                   ),
                 ),
                 const SizedBox(height: 0),
@@ -133,17 +136,15 @@ class LoginViewState extends ConsumerState<LoginView> {
                                 password: _passwordController.text,
                               );
                           // 登录成功后清空表单
-                          setState(() {
+                          if (mounted) {
                             _emailController.clear();
                             _passwordController.clear();
                             _isPasswordVisible = false;
                             if (_formKey.currentState != null) {
                               _formKey.currentState!.reset();
                             }
-                          });
-                          // 登录成功后导航到首页
-                          if (mounted) {
-                            context.go('/');
+                            // 使用 pushReplacement 而不是 go
+                            context.pushReplacement('/');
                           }
                         } catch (e) {
                           if (mounted) {
@@ -178,10 +179,10 @@ class LoginViewState extends ConsumerState<LoginView> {
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: const Text(
-                          '登录',
+                        child: Text(
+                          l10n.loginButton,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -195,9 +196,9 @@ class LoginViewState extends ConsumerState<LoginView> {
                 TextButton(
                   onPressed: widget.onToggleView,
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.white60,
+                    foregroundColor: Colors.black.withOpacity(0.5),
                   ),
-                  child: const Text('没有账号？注册'),
+                  child: Text(l10n.loginNoAccount),
                 ),
                 Column(
                   children: [
@@ -209,14 +210,18 @@ class LoginViewState extends ConsumerState<LoginView> {
                             'assets/images/Rectangle3.svg',
                             width: 80,
                             fit: BoxFit.fitWidth,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.black,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
-                            'Or continue with',
+                            l10n.loginContinueWith,
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
+                              color: Colors.black.withOpacity(0.5),
                             ),
                           ),
                         ),
@@ -225,6 +230,10 @@ class LoginViewState extends ConsumerState<LoginView> {
                             'assets/images/Rectangle4.svg',
                             width: 80,
                             fit: BoxFit.fitWidth,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.black,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
                       ],

@@ -6,6 +6,7 @@ import '../../providers/auth_provider.dart';
 import 'widgets/custom_text_field.dart';
 import 'widgets/social_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterView extends ConsumerStatefulWidget {
   final VoidCallback onToggleView;
@@ -54,15 +55,9 @@ class RegisterViewState extends ConsumerState<RegisterView> {
     super.dispose();
   }
 
-  String? _validateConfirmPassword(String? value) {
-    if (value != _passwordController.text) {
-      return '两次输入的密码不一致';
-    }
-    return null;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Form(
       key: _formKey,
       child: Column(
@@ -75,16 +70,16 @@ class RegisterViewState extends ConsumerState<RegisterView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
-                  '创建账号',
-                  style: TextStyle(
+                Text(
+                  l10n.registerCreateAccount,
+                  style: const TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
                 Text(
-                  '开始你的学习之旅',
+                  l10n.registerStartJourney,
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.black.withOpacity(0.5),
@@ -94,15 +89,15 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                 CustomTextField(
                   key: _emailFieldKey,
                   controller: _emailController,
-                  hintText: '邮箱地址',
+                  hintText: l10n.registerEmailHint,
                   icon: Icons.email_outlined,
                   validator: (val) {
                     if (val == null || val.isEmpty) {
-                      return '请输入邮箱地址';
+                      return l10n.registerEmailRequired;
                     }
                     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
                         .hasMatch(val)) {
-                      return '请输入有效的邮箱地址';
+                      return l10n.registerEmailInvalid;
                     }
                     return null;
                   },
@@ -111,7 +106,7 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                 CustomTextField(
                   key: _passwordFieldKey,
                   controller: _passwordController,
-                  hintText: '密码',
+                  hintText: l10n.registerPasswordHint,
                   icon: Icons.lock_outline,
                   isPassword: true,
                   showPasswordStrength: true,
@@ -121,13 +116,14 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                       _isPasswordVisible = !_isPasswordVisible;
                     });
                   },
-                  validator: (val) => val!.length < 6 ? '密码至少需要6个字符' : null,
+                  validator: (val) =>
+                      val!.length < 6 ? l10n.registerPasswordTooShort : null,
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
                   key: _confirmPasswordFieldKey,
                   controller: _confirmPasswordController,
-                  hintText: '确认密码',
+                  hintText: l10n.registerConfirmPasswordHint,
                   icon: Icons.lock_outline,
                   isPassword: true,
                   showPasswordStrength: false,
@@ -137,7 +133,9 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                       _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
                     });
                   },
-                  validator: _validateConfirmPassword,
+                  validator: (val) => val != _passwordController.text
+                      ? l10n.registerPasswordMismatch
+                      : null,
                 ),
                 const SizedBox(height: 30),
                 SizedBox(
@@ -161,7 +159,8 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                           if (mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                content: Text('注册失败: ${e.toString()}'),
+                                content:
+                                    Text(l10n.registerFailure(e.toString())),
                                 backgroundColor: Colors.red,
                               ),
                             );
@@ -190,10 +189,10 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                       child: Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: const Text(
-                          '注册',
+                        child: Text(
+                          l10n.registerButton,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -207,9 +206,9 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                 TextButton(
                   onPressed: widget.onToggleView,
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.white60,
+                    foregroundColor: Colors.black.withOpacity(0.5),
                   ),
-                  child: const Text('已有账号？登录'),
+                  child: Text(l10n.registerHaveAccount),
                 ),
                 const SizedBox(height: 24),
               ],
