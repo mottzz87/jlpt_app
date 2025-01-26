@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 import '../providers/user_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -9,13 +10,14 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userAsync = ref.watch(userProvider);
+    final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text('个人信息'),
+        title: Text(l10n.profileTitle),
       ),
       body: userAsync.when(
         loading: () => const Center(
@@ -62,7 +64,7 @@ class ProfileScreen extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                user.email ?? '未设置邮箱',
+                                user.email ?? l10n.profileEmailNotSet,
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
                               const SizedBox(height: 4),
@@ -102,7 +104,7 @@ class ProfileScreen extends ConsumerWidget {
                           context,
                           Icons.star_rounded,
                           '0',
-                          '免费考试',
+                          l10n.profileFreeExams,
                         ),
                         Container(
                           height: 40,
@@ -113,7 +115,7 @@ class ProfileScreen extends ConsumerWidget {
                           context,
                           Icons.task_alt_rounded,
                           '0',
-                          '已完成考试',
+                          l10n.profileCompletedExams,
                         ),
                       ],
                     ),
@@ -135,13 +137,13 @@ class ProfileScreen extends ConsumerWidget {
                           Icons.school_rounded,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        title: const Text('学习更多'),
+                        title: Text(l10n.profileLearnMore),
                         trailing: const Icon(Icons.chevron_right),
                         onTap: () {
                           // TODO: 导航到语言设置
                         },
                       ),
-                      Divider(
+                      const Divider(
                         height: 1,
                         indent: 16,
                         endIndent: 16,
@@ -151,7 +153,7 @@ class ProfileScreen extends ConsumerWidget {
                           Icons.notifications_rounded,
                           color: Theme.of(context).colorScheme.primary,
                         ),
-                        title: const Text('通知设置'),
+                        title: Text(l10n.settingsNotifications),
                         trailing: const Icon(Icons.chevron_right),
                         onTap: () {
                           // TODO: 导航到通知设置
