@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/models.dart';
 
 class ExamDetailScreen extends StatelessWidget {
@@ -12,8 +11,6 @@ class ExamDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
     // TODO: Replace with actual data from provider
     const Paper? paper = null;
     final List<Question> questions = [];
@@ -48,7 +45,7 @@ class ExamDetailScreen extends StatelessWidget {
                     ),
                     if (paper.time != null)
                       Text(
-                        '${l10n.examsExamTime}: ${paper.time} ${l10n.examsMinutes}',
+                        '${paper.time} minutes',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                   ],
@@ -57,7 +54,7 @@ class ExamDetailScreen extends StatelessWidget {
                   onPressed: () {
                     // TODO: Start exam
                   },
-                  child: Text(l10n.examsStartExam),
+                  child: Text('Start Exam'),
                 ),
               ],
             ),
@@ -67,7 +64,7 @@ class ExamDetailScreen extends StatelessWidget {
           Expanded(
             child: questions.isEmpty
                 ? Center(
-                    child: Text(l10n.examsTodo),
+                    child: Text('No questions found'),
                   )
                 : ListView.builder(
                     itemCount: questions.length,

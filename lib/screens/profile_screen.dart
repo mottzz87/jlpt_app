@@ -1,110 +1,170 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../models/models.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
+import '../providers/user_provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
-
-    // TODO: Replace with actual data from provider
-    const User? user = null;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userAsync = ref.watch(userProvider);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text(l10n.appTitle),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: const Text('个人信息'),
       ),
-      body: user == null
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // User Avatar and Basic Info
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: user.avatar != null
-                            ? NetworkImage(user.avatar!)
-                            : null,
-                        child: user.avatar == null
-                            ? const Icon(Icons.person, size: 40)
-                            : null,
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              user.nickname ?? user.username,
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              user.email,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ],
+      body: userAsync.when(
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
+        error: (error, stack) => Center(
+          child: Text('加载失败: $error'),
+        ),
+        data: (supabase.User? user) {
+          if (user == null) {
+            return const Center(
+              child: Text('未登录'),
+            );
+          }
+
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // 用户头像和基本信息
+                Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundImage: user.userMetadata?['avatar_url'] !=
+                                  null
+                              ? NetworkImage(user.userMetadata!['avatar_url'])
+                              : null,
+                          child: user.userMetadata?['avatar_url'] == null
+                              ? const Icon(Icons.person, size: 40)
+                              : null,
                         ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                user.email ?? '未设置邮箱',
+                                style: Theme.of(context).textTheme.titleLarge,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'ID: ${user.id}',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // 统计信息
+                Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _buildStat(
+                          context,
+                          Icons.star_rounded,
+                          '0',
+                          '免费考试',
+                        ),
+                        Container(
+                          height: 40,
+                          width: 1,
+                          color: Theme.of(context).dividerColor,
+                        ),
+                        _buildStat(
+                          context,
+                          Icons.task_alt_rounded,
+                          '0',
+                          '已完成考试',
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 24),
+
+                // 设置选项
+                Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.school_rounded,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        title: const Text('学习更多'),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () {
+                          // TODO: 导航到语言设置
+                        },
+                      ),
+                      Divider(
+                        height: 1,
+                        indent: 16,
+                        endIndent: 16,
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.notifications_rounded,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        title: const Text('通知设置'),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () {
+                          // TODO: 导航到通知设置
+                        },
                       ),
                     ],
                   ),
-
-                  const SizedBox(height: 32),
-
-                  // Stats
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildStat(
-                            context,
-                            Icons.star,
-                            user.goldNumber.toString(),
-                            l10n.examsFree,
-                          ),
-                          _buildStat(
-                            context,
-                            Icons.book,
-                            user.wordNumber.toString(),
-                            l10n.examsDone,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 32),
-
-                  // Settings
-                  ListTile(
-                    leading: const Icon(Icons.language),
-                    title: Text(l10n.homeLearnMore),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {
-                      // TODO: Navigate to language settings
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.notifications),
-                    title: const Text('Notifications'),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () {
-                      // TODO: Navigate to notification settings
-                    },
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
+          );
+        },
+      ),
     );
   }
 
@@ -115,16 +175,26 @@ class ProfileScreen extends StatelessWidget {
     String label,
   ) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 24),
+        Icon(
+          icon,
+          size: 28,
+          color: Theme.of(context).colorScheme.primary,
+        ),
         const SizedBox(height: 8),
         Text(
           value,
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
         ),
         Text(
           label,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.secondary,
+              ),
         ),
       ],
     );

@@ -106,13 +106,13 @@ class _AuthScreenState extends ConsumerState<AuthScreen>
     if (_formKey.currentState!.validate()) {
       if (isLogin) {
         ref.read(authProvider.notifier).login(
-              userId: _usernameController.text,
-              username: _usernameController.text,
+              email: _usernameController.text,
+              password: _passwordController.text,
             );
       } else {
         ref.read(authProvider.notifier).login(
-              userId: _emailController.text,
-              username: _emailController.text,
+              email: _emailController.text,
+              password: _passwordController.text,
             );
       }
     }

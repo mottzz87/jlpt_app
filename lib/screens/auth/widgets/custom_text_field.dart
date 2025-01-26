@@ -69,8 +69,8 @@ class CustomTextFieldState extends State<CustomTextField> {
 
     final requirements = [
       PasswordRequirement(
-        '长度至少为 8 位',
-        password.length >= 8,
+        '长度至少为 6 位',
+        password.length >= 6,
         icon: Icons.format_size,
       ),
       PasswordRequirement(

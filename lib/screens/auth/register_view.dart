@@ -121,7 +121,7 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                       _isPasswordVisible = !_isPasswordVisible;
                     });
                   },
-                  validator: (val) => val!.length < 8 ? '密码至少需要8个字符' : null,
+                  validator: (val) => val!.length < 6 ? '密码至少需要6个字符' : null,
                 ),
                 const SizedBox(height: 16),
                 CustomTextField(
@@ -143,12 +143,25 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        ref.read(authProvider.notifier).login(
-                              userId: _emailController.text,
-                              username: _emailController.text,
+                        try {
+                          await ref.read(authProvider.notifier).signUp(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
+                          // 注册成功后自动切换到登录页面
+                          widget.onToggleView();
+                        } catch (e) {
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('注册失败: ${e.toString()}'),
+                                backgroundColor: Colors.red,
+                              ),
                             );
+                          }
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(

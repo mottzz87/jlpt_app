@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import '../../providers/auth_provider.dart';
 import 'widgets/custom_text_field.dart';
 import 'widgets/social_button.dart';
@@ -104,7 +105,7 @@ class LoginViewState extends ConsumerState<LoginView> {
                       _isPasswordVisible = !_isPasswordVisible;
                     });
                   },
-                  validator: (val) => val!.length < 8 ? '密码至少需要8个字符' : null,
+                  validator: (val) => val!.length < 6 ? '密码至少需要6个字符' : null,
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -120,20 +121,36 @@ class LoginViewState extends ConsumerState<LoginView> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        ref.read(authProvider.notifier).login(
-                              userId: _emailController.text,
-                              username: _emailController.text,
-                            );
-                        setState(() {
-                          _emailController.clear();
-                          _passwordController.clear();
-                          _isPasswordVisible = false;
-                          if (_formKey.currentState != null) {
-                            _formKey.currentState!.reset();
+                        try {
+                          await ref.read(authProvider.notifier).login(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
+                          // 登录成功后清空表单
+                          setState(() {
+                            _emailController.clear();
+                            _passwordController.clear();
+                            _isPasswordVisible = false;
+                            if (_formKey.currentState != null) {
+                              _formKey.currentState!.reset();
+                            }
+                          });
+                          // 登录成功后导航到首页
+                          if (mounted) {
+                            context.go('/');
                           }
-                        });
+                        } catch (e) {
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('登录失败: ${e.toString()}'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(
