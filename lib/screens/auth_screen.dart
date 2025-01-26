@@ -10,13 +10,13 @@ import 'auth/register_view.dart';
 import 'package:flutter/rendering.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
-  const AuthScreen({Key? key}) : super(key: key);
+  const AuthScreen({super.key});
 
   @override
-  ConsumerState<AuthScreen> createState() => _AuthScreenState();
+  AuthScreenState createState() => AuthScreenState();
 }
 
-class _AuthScreenState extends ConsumerState<AuthScreen>
+class AuthScreenState extends ConsumerState<AuthScreen>
     with SingleTickerProviderStateMixin {
   bool isLogin = true;
   late AnimationController _animationController;

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../providers/auth_provider.dart';
 import '../providers/locale_provider.dart';
+import '../providers/theme_provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 class SettingsScreen extends ConsumerWidget {
@@ -15,6 +16,8 @@ class SettingsScreen extends ConsumerWidget {
     final authNotifier = ref.read(authProvider.notifier);
     final localeNotifier = ref.read(localeProvider.notifier);
     final localeState = ref.watch(localeProvider);
+    final themeMode = ref.watch(themeProvider);
+    final themeNotifier = ref.read(themeProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -109,19 +112,37 @@ class SettingsScreen extends ConsumerWidget {
             },
           ),
           ListTile(
+            leading: const Icon(Icons.palette),
+            title: Text(l10n.settingsTheme),
+            trailing: DropdownButton<ThemeMode>(
+              value: themeMode,
+              onChanged: (ThemeMode? newMode) {
+                if (newMode != null) {
+                  themeNotifier.setThemeMode(newMode);
+                }
+              },
+              items: [
+                DropdownMenuItem(
+                  value: ThemeMode.system,
+                  child: Text(l10n.settingsTheme),
+                ),
+                DropdownMenuItem(
+                  value: ThemeMode.light,
+                  child: const Text('浅色'),
+                ),
+                DropdownMenuItem(
+                  value: ThemeMode.dark,
+                  child: Text(l10n.settingsDarkMode),
+                ),
+              ],
+            ),
+          ),
+          ListTile(
             leading: const Icon(Icons.notifications),
             title: Text(l10n.settingsNotifications),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
               // 实现通知设置
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.palette),
-            title: Text(l10n.settingsTheme),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {
-              // 实现主题设置
             },
           ),
           ListTile(

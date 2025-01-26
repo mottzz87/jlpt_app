@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class SocialIconButton extends StatelessWidget {
-  final IconData icon;
+class SocialButton extends StatelessWidget {
+  final String icon;
   final VoidCallback onPressed;
 
-  const SocialIconButton({
+  const SocialButton({
     Key? key,
     required this.icon,
     required this.onPressed,
@@ -14,25 +14,22 @@ class SocialIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 44,
-      height: 44,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(8),
+        color: Theme.of(context).colorScheme.surface.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: BorderRadius.circular(8),
-          child: Center(
-            child: FaIcon(
-              icon,
-              color: Colors.white,
-              size: 18,
-            ),
+      child: IconButton(
+        onPressed: onPressed,
+        icon: SvgPicture.asset(
+          icon,
+          width: 24,
+          height: 24,
+          colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.onSurface,
+            BlendMode.srcIn,
           ),
         ),
+        color: Theme.of(context).colorScheme.onSurface,
       ),
     );
   }

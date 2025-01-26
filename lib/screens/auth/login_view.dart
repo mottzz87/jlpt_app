@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import '../../providers/auth_provider.dart';
 import 'widgets/custom_text_field.dart';
-import 'widgets/social_button.dart';
+import 'widgets/social_icon_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginView extends ConsumerStatefulWidget {
