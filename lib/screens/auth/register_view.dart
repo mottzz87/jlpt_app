@@ -80,14 +80,14 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black87,
                   ),
                 ),
                 Text(
                   '开始你的学习之旅',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.black.withOpacity(0.5),
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -144,10 +144,15 @@ class RegisterViewState extends ConsumerState<RegisterView> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
+                      // 先触发所有字段的验证
+                      _emailFieldKey.currentState?.validate();
+                      _passwordFieldKey.currentState?.validate();
+                      _confirmPasswordFieldKey.currentState?.validate();
+
                       if (_formKey.currentState!.validate()) {
                         try {
                           await ref.read(authProvider.notifier).signUp(
-                                email: _emailController.text,
+                                email: _emailController.text.trim(),
                                 password: _passwordController.text,
                               );
                           // 注册成功后自动切换到登录页面

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
@@ -127,9 +126,11 @@ class AuthScreenState extends ConsumerState<AuthScreen>
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              const Color(0xFF1A1A1A),
-              Colors.purple.shade900,
+              const Color(0xFFFFFBF5).withOpacity(0.95), // 温暖的米色
+              const Color(0xFFE2E8F0).withOpacity(0.8), // 中等蓝灰色
+              const Color(0xFF6366F1).withOpacity(0.15), // 淡紫色主题色
             ],
+            stops: const [0.0, 0.6, 1.0], // 调整颜色分布
           ),
         ),
         child: Stack(
@@ -262,11 +263,31 @@ class AuthScreenState extends ConsumerState<AuthScreen>
                   child: Container(
                     padding: const EdgeInsets.fromLTRB(24, 32, 24, 24),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.15),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          const Color(0xFFFFFBF5)
+                              .withOpacity(0.55), // 降低米色的不透明度
+                          const Color(0xFFE2E8F0)
+                              .withOpacity(0.45), // 降低蓝灰色的不透明度
+                          const Color.fromARGB(255, 124, 44, 195)
+                              .withOpacity(0.05), // 降低紫色的不透明度
+                        ],
+                        stops: const [0.0, 0.6, 1.0],
+                      ),
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(40),
                         topRight: Radius.circular(40),
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 3,
+                          offset: const Offset(0, -8),
+                          spreadRadius: 5,
+                        ),
+                      ],
                     ),
                     child: SingleChildScrollView(
                       physics: const NeverScrollableScrollPhysics(),
@@ -353,109 +374,6 @@ class AuthScreenState extends ConsumerState<AuthScreen>
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String hintText;
-  final IconData icon;
-  final bool isPassword;
-  final bool? isPasswordVisible;
-  final Function()? onPasswordVisibilityToggle;
-  final Function(String)? onChanged;
-  final String? Function(String?)? validator;
-
-  const CustomTextField({
-    Key? key,
-    required this.controller,
-    required this.hintText,
-    required this.icon,
-    this.isPassword = false,
-    this.isPasswordVisible,
-    this.onPasswordVisibilityToggle,
-    this.onChanged,
-    this.validator,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: TextFormField(
-        controller: controller,
-        obscureText: isPassword && !(isPasswordVisible ?? false),
-        validator: validator,
-        onChanged: onChanged,
-        style: const TextStyle(color: Colors.white),
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
-          prefixIcon: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Icon(icon, color: Colors.white.withOpacity(0.5), size: 20),
-          ),
-          prefixIconConstraints: const BoxConstraints(minWidth: 44),
-          suffixIcon: isPassword
-              ? IconButton(
-                  icon: Icon(
-                    isPasswordVisible ?? false
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                    color: Colors.white.withOpacity(0.5),
-                    size: 20,
-                  ),
-                  onPressed: onPasswordVisibilityToggle,
-                )
-              : null,
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class SocialIconButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback onPressed;
-
-  const SocialIconButton({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 44,
-      height: 44,
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: BorderRadius.circular(8),
-          child: Center(
-            child: FaIcon(
-              icon,
-              color: Colors.white,
-              size: 18,
-            ),
-          ),
         ),
       ),
     );

@@ -131,6 +131,14 @@ class CustomTextFieldState extends State<CustomTextField> {
     }
   }
 
+  void validate() {
+    if (widget.validator != null) {
+      setState(() {
+        _errorText = widget.validator!(widget.controller.text);
+      });
+    }
+  }
+
   void reset() {
     if (mounted) {
       setState(() {
@@ -152,30 +160,52 @@ class CustomTextFieldState extends State<CustomTextField> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.12),
+            color: const Color(0xFFF8FAFC).withOpacity(0.8),
             borderRadius: BorderRadius.circular(8),
-            border: widget.showPasswordStrength &&
-                    widget.isPassword &&
-                    _passwordStrength != null
-                ? Border.all(
-                    color: color.withOpacity(0.3),
-                    width: 1,
-                  )
-                : null,
+            border: Border.all(
+              color: const Color(0xFFCBD5E1),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
           ),
           child: TextFormField(
             controller: widget.controller,
             obscureText:
                 widget.isPassword && !(widget.isPasswordVisible ?? false),
             onChanged: _validateInput,
-            style: const TextStyle(color: Colors.white),
+            validator: (value) {
+              if (widget.validator != null) {
+                final error = widget.validator!(value);
+                setState(() {
+                  _errorText = error;
+                });
+                return error;
+              }
+              return null;
+            },
+            style: const TextStyle(
+              color: Color(0xFF334155),
+            ),
             decoration: InputDecoration(
               hintText: widget.hintText,
-              hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+              hintStyle: const TextStyle(
+                color: Color(0xFF94A3B8),
+              ),
               prefixIcon: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Icon(widget.icon,
-                    color: Colors.white.withOpacity(0.5), size: 20),
+                child: Icon(
+                  widget.icon,
+                  color: _errorText != null
+                      ? const Color(0xFFEF4444)
+                      : const Color.fromARGB(255, 99, 99, 99),
+                  size: 20,
+                ),
               ),
               prefixIconConstraints: const BoxConstraints(minWidth: 44),
               suffixIcon: widget.isPassword
@@ -198,7 +228,7 @@ class CustomTextFieldState extends State<CustomTextField> {
                             child: Text(
                               level,
                               style: TextStyle(
-                                color: color,
+                                color: const Color(0xFF475569),
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -209,7 +239,7 @@ class CustomTextFieldState extends State<CustomTextField> {
                             widget.isPasswordVisible ?? false
                                 ? Icons.visibility_off
                                 : Icons.visibility,
-                            color: Colors.white.withOpacity(0.5),
+                            color: Colors.black.withOpacity(0.25),
                             size: 20,
                           ),
                           onPressed: widget.onPasswordVisibilityToggle,

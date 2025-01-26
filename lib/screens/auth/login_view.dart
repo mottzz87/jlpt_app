@@ -65,14 +65,14 @@ class LoginViewState extends ConsumerState<LoginView> {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 Text(
                   'welcome back we missed you',
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.white.withOpacity(0.7),
+                    color: Colors.black.withOpacity(0.5),
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -112,7 +112,7 @@ class LoginViewState extends ConsumerState<LoginView> {
                   child: TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.white60,
+                      foregroundColor: Colors.black.withOpacity(0.5),
                     ),
                     child: const Text('忘记密码？'),
                   ),
@@ -122,10 +122,14 @@ class LoginViewState extends ConsumerState<LoginView> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
+                      // 先触发所有字段的验证
+                      // _emailFieldKey.currentState?.validate();
+                      // _passwordFieldKey.currentState?.validate();
+
                       if (_formKey.currentState!.validate()) {
                         try {
                           await ref.read(authProvider.notifier).login(
-                                email: _emailController.text,
+                                email: _emailController.text.trim(),
                                 password: _passwordController.text,
                               );
                           // 登录成功后清空表单
@@ -200,22 +204,28 @@ class LoginViewState extends ConsumerState<LoginView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(
-                          'assets/images/Rectangle3.svg',
-                          width: 98,
+                        Flexible(
+                          child: SvgPicture.asset(
+                            'assets/images/Rectangle3.svg',
+                            width: 80,
+                            fit: BoxFit.fitWidth,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           child: Text(
                             'Or continue with',
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.7),
+                              color: Colors.white.withOpacity(0.5),
                             ),
                           ),
                         ),
-                        SvgPicture.asset(
-                          'assets/images/Rectangle4.svg',
-                          width: 98,
+                        Flexible(
+                          child: SvgPicture.asset(
+                            'assets/images/Rectangle4.svg',
+                            width: 80,
+                            fit: BoxFit.fitWidth,
+                          ),
                         ),
                       ],
                     ),
