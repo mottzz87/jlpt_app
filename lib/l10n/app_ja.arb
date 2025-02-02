@@ -1,5 +1,6 @@
 {
   "@@locale": "ja",
+  "appTitle": "JLPT 試験プラットフォーム",
   "homeTitle": "JLPT試験プラットフォームへようこそ",
   "homeStartPractice": "練習開始",
   "homeStartPracticeDescription": "模擬試験で JLPT 対策の旅を始めましょう。",
@@ -77,6 +78,14 @@
   "settingsDarkMode": "ダークモード",
   "settingsAutoPlay": "音声自動再生",
   "settingsVersion": "バージョン",
+  "settingsGeneral": "一般",
+  "settingsHelp": "ヘルプ",
+  "settingsLoading": "読み込み中...",
+  "settingsError": "エラー",
+  "settingsThemeLight": "ライト",
+  "settingsThemeDark": "ダーク",
+  "settingsNotificationDesc": "通知の管理",
+  "settingsSoundDesc": "サウンドと振動の管理",
   "loginWelcomeBack": "おかえりなさい",
   "loginWeMissedYou": "お待ちしておりました",
   "loginEmailHint": "メールアドレス",
@@ -106,5 +115,6 @@
         "type": "String"
       }
     }
-  }
+  },
+  "settingsThemeSystem": "システム設定に従う"
 } 

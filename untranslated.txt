@@ -1,1 +1,15 @@
-{}
+{
+  "ja": [
+    "profileStats",
+    "profileStudyTime",
+    "profileTasks",
+    "profilePoints",
+    "profileStreak",
+    "profileInfo",
+    "profileUsername",
+    "profileEmail",
+    "profilePhone",
+    "profileNotSet",
+    "profileError"
+  ]
+}

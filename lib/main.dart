@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'router/router.dart';
-import 'services/database_service.dart';
-import 'services/storage_service.dart';
-import 'services/supabase_service.dart';
-import 'providers/locale_provider.dart';
-import 'providers/theme_provider.dart';
-import 'themes/app_theme.dart';
+import 'core/router/app_router.dart';
+import 'core/services/database_service.dart';
+import 'core/services/storage_service.dart';
+import 'core/services/supabase_service.dart';
+import 'core/theme/providers/locale_provider.dart';
+import 'core/theme/providers/theme_provider.dart';
+import 'core/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

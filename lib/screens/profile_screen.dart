@@ -14,9 +14,9 @@ class ProfileScreen extends ConsumerWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     // 定义温暖的颜色
-    final warmPrimary = const Color(0xFFE8998D);
+    final warmPrimary = const Color(0xFF8F9232);
     final warmSecondary = const Color(0xFFEDB183);
-    final warmBackground = const Color(0xFFFFF5EC);
+    final warmBackground = const Color(0xFFEEF1E1);
 
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +26,7 @@ class ProfileScreen extends ConsumerWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: warmBackground.withOpacity(0.3),
+          color: warmBackground.withOpacity(0.1),
         ),
         child: userAsync.when(
           loading: () => const Center(
@@ -53,46 +53,25 @@ class ProfileScreen extends ConsumerWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    color: warmPrimary.withOpacity(0.1),
+                    color: warmBackground,
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: warmPrimary.withOpacity(0.2),
-                          width: 1,
-                        ),
                       ),
                       child: Row(
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: warmPrimary.withOpacity(0.3),
-                                width: 2,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: warmPrimary.withOpacity(0.2),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            child: CircleAvatar(
-                              radius: 40,
-                              backgroundImage:
-                                  user.userMetadata?['avatar_url'] != null
-                                      ? NetworkImage(
-                                          user.userMetadata!['avatar_url'])
-                                      : null,
-                              backgroundColor: warmPrimary.withOpacity(0.1),
-                              child: user.userMetadata?['avatar_url'] == null
-                                  ? Icon(Icons.person,
-                                      size: 40, color: warmPrimary)
-                                  : null,
-                            ),
+                          CircleAvatar(
+                            radius: 40,
+                            backgroundImage: user.userMetadata?['avatar_url'] !=
+                                    null
+                                ? NetworkImage(user.userMetadata!['avatar_url'])
+                                : null,
+                            backgroundColor: warmPrimary.withOpacity(0.1),
+                            child: user.userMetadata?['avatar_url'] == null
+                                ? Icon(Icons.person,
+                                    size: 40, color: warmPrimary)
+                                : null,
                           ),
                           const SizedBox(width: 20),
                           Expanded(
@@ -103,9 +82,10 @@ class ProfileScreen extends ConsumerWidget {
                                   user.email ?? l10n.profileEmailNotSet,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .titleLarge
+                                      .titleMedium
                                       ?.copyWith(
-                                        color: warmPrimary,
+                                        color: Colors.blackThemeUtils
+                                            .withOpacity(0.8),
                                         fontWeight: FontWeight.bold,
                                       ),
                                 ),
@@ -114,9 +94,10 @@ class ProfileScreen extends ConsumerWidget {
                                   'ID: ${user.id}',
                                   style: Theme.of(context)
                                       .textTheme
-                                      .bodyMedium
+                                      .bodySmall
                                       ?.copyWith(
-                                        color: warmPrimary.withOpacity(0.7),
+                                        color: Colors.blackThemeUtils
+                                            .withOpacity(0.4),
                                       ),
                                 ),
                               ],
@@ -135,16 +116,12 @@ class ProfileScreen extends ConsumerWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    color: warmSecondary.withOpacity(0.1),
+                    color: warmBackground,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 24, horizontal: 16),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: warmSecondary.withOpacity(0.2),
-                          width: 1,
-                        ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -158,7 +135,7 @@ class ProfileScreen extends ConsumerWidget {
                           Container(
                             height: 50,
                             width: 1,
-                            color: warmSecondary.withOpacity(0.2),
+                            color: Colors.black.withOpacity(0.1),
                           ),
                           _buildStat(
                             context,
@@ -179,79 +156,94 @@ class ProfileScreen extends ConsumerWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
-                    color: Colors.white,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: warmPrimary.withOpacity(0.2),
-                          width: 1,
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: warmPrimary.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Icon(
-                                Icons.school_rounded,
-                                color: warmPrimary,
-                              ),
-                            ),
-                            title: Text(
-                              l10n.profileLearnMore,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: warmPrimary.withOpacity(0.8),
-                              ),
-                            ),
-                            trailing: Icon(
-                              Icons.chevron_right,
-                              color: warmPrimary,
+                    color: warmBackground,
+                    child: Column(
+                      children: [
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(16),
                             ),
                             onTap: () {
                               // TODO: 导航到语言设置
                             },
-                          ),
-                          Divider(
-                            height: 1,
-                            indent: 16,
-                            endIndent: 16,
-                            color: warmPrimary.withOpacity(0.1),
-                          ),
-                          ListTile(
-                            leading: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: warmPrimary.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(8),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
                               ),
-                              child: Icon(
-                                Icons.notifications_rounded,
-                                color: warmPrimary,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.school_rounded,
+                                    color: Colors.black.withOpacity(0.6),
+                                    size: 24,
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      l10n.profileLearnMore,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.blackThemeUtils
+                                            .withOpacity(0.8),
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right,
+                                    color: Colors.black.withOpacity(0.4),
+                                  ),
+                                ],
                               ),
                             ),
-                            title: Text(
-                              l10n.settingsNotifications,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: warmPrimary.withOpacity(0.8),
-                              ),
-                            ),
-                            trailing: Icon(
-                              Icons.chevron_right,
-                              color: warmPrimary,
+                          ),
+                        ),
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: const BorderRadius.vertical(
+                              bottom: Radius.circular(16),
                             ),
                             onTap: () {
                               // TODO: 导航到通知设置
                             },
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.notifications_rounded,
+                                    color: Colors.black.withOpacity(0.6),
+                                    size: 24,
+                                  ),
+                                  const SizedBox(width: 16),
+                                  Expanded(
+                                    child: Text(
+                                      l10n.settingsNotifications,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.blackThemeUtils
+                                            .withOpacity(0.8),
+                                      ),
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.chevron_right,
+                                    color: Colors.black.withOpacity(0.4),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -269,32 +261,26 @@ class ProfileScreen extends ConsumerWidget {
     String value,
     String label,
   ) {
-    final warmSecondary = const Color(0xFFEDB183);
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: warmSecondary.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.05),
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: warmSecondary.withOpacity(0.2),
-              width: 1,
-            ),
           ),
           child: Icon(
             icon,
             size: 28,
-            color: warmSecondary,
+            color: Colors.black.withOpacity(0.6),
           ),
         ),
         const SizedBox(height: 12),
         Text(
           value,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: warmSecondary,
+                color: Colors.black.withOpacity(0.8),
                 fontWeight: FontWeight.bold,
               ),
         ),
@@ -302,7 +288,7 @@ class ProfileScreen extends ConsumerWidget {
         Text(
           label,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: warmSecondary.withOpacity(0.8),
+                color: Colors.black.withOpacity(0.4),
               ),
         ),
       ],

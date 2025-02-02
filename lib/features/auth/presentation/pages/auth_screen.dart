@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jlpt_app/core/theme/theme_utils.dart';
 import 'dart:math';
 import 'dart:ui';
 import 'package:jlpt_app/features/auth/presentation/providers/auth_provider.dart';
 import 'package:jlpt_app/features/auth/presentation/pages/login_view.dart';
 import 'package:jlpt_app/features/auth/presentation/pages/register_view.dart';
-import 'package:flutter/rendering.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
@@ -137,9 +136,9 @@ class AuthScreenState extends ConsumerState<AuthScreen>
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              const Color(0xFFFFFBF5).withOpacity(0.95), // 温暖的米色
-              const Color(0xFFE2E8F0).withOpacity(0.8), // 中等蓝灰色
-              const Color(0xFF6366F1).withOpacity(0.15), // 淡紫色主题色
+              const Color(0xFFFFFBF5).withOpacityValue(0.95), // 温暖的米色
+              const Color(0xFFE2E8F0).withOpacityValue(0.8), // 中等蓝灰色
+              const Color(0xFF6366F1).withOpacityValue(0.15), // 淡紫色主题色
             ],
             stops: const [0.0, 0.6, 1.0], // 调整颜色分布
           ),
@@ -172,13 +171,13 @@ class AuthScreenState extends ConsumerState<AuthScreen>
                         height: 200,
                         width: 200,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withOpacityValue(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
                           Icons.person,
                           size: 64,
-                          color: Colors.white.withOpacity(0.7),
+                          color: Colors.white.withOpacityValue(0.7),
                         ),
                       );
                     },
@@ -210,13 +209,13 @@ class AuthScreenState extends ConsumerState<AuthScreen>
                         height: 200,
                         width: 200,
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
+                          color: Colors.white.withOpacityValue(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
                           Icons.person_add,
                           size: 64,
-                          color: Colors.white.withOpacity(0.7),
+                          color: Colors.white.withOpacityValue(0.7),
                         ),
                       );
                     },
@@ -279,11 +278,11 @@ class AuthScreenState extends ConsumerState<AuthScreen>
                         end: Alignment.bottomCenter,
                         colors: [
                           const Color(0xFFFFFBF5)
-                              .withOpacity(0.55), // 降低米色的不透明度
+                              .withOpacityValue(0.55), // 降低米色的不透明度
                           const Color(0xFFE2E8F0)
-                              .withOpacity(0.45), // 降低蓝灰色的不透明度
+                              .withOpacityValue(0.45), // 降低蓝灰色的不透明度
                           const Color.fromARGB(255, 124, 44, 195)
-                              .withOpacity(0.05), // 降低紫色的不透明度
+                              .withOpacityValue(0.05), // 降低紫色的不透明度
                         ],
                         stops: const [0.0, 0.6, 1.0],
                       ),
@@ -293,7 +292,7 @@ class AuthScreenState extends ConsumerState<AuthScreen>
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withOpacityValue(0.1),
                           blurRadius: 3,
                           offset: const Offset(0, -8),
                           spreadRadius: 5,
@@ -409,7 +408,7 @@ class _BackgroundBubblesState extends State<BackgroundBubbles>
         Random().nextDouble() * 800,
       ),
       size: Random().nextDouble() * 60 + 20,
-      color: Colors.purple.withOpacity(0.3),
+      color: Colors.purple.withOpacityValue(0.3),
     ),
   );
 

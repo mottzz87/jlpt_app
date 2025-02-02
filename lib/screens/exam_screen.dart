@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../providers/exam_provider.dart';
+import 'package:jlpt_app/features/exam/presentation/providers/exam_provider.dart';
 
 class ExamScreen extends ConsumerWidget {
   const ExamScreen({

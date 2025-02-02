@@ -1,5 +1,6 @@
 {
   "@@locale": "zh",
+  "appTitle": "JLPT 考试平台",
   "homeTitle": "欢迎来到 JLPT 考试平台",
   "homeStartPractice": "开始练习",
   "homeStartPracticeDescription": "通过我们的模拟考试开始您的 JLPT 备考之旅。",
@@ -34,14 +35,13 @@
   "examsHearingTime": "听力时间",
   "examsTotalScore": "总分",
   "examsYourScore": "你的得分",
-
-  "examDetailQuestion": "题目",
-  "examDetailPrevious": "上一题",
   "examDetailNext": "下一题",
   "examDetailSubmit": "提交试卷",
   "examDetailConfirmSubmit": "确认交卷",
   "examDetailSubmitWarning": "确定要交卷吗？提交后将无法修改答案。",
   "examDetailContinue": "继续答题",
+  "examDetailQuestion": "题目",
+  "examDetailPrevious": "上一题",
 
   "profileTitle": "个人信息",
   "profileEditProfile": "编辑资料",
@@ -77,6 +77,16 @@
   "settingsDarkMode": "深色模式",
   "settingsAutoPlay": "自动播放音频",
   "settingsVersion": "版本",
+  "settingsGeneral": "通用",
+  "settingsHelp": "帮助",
+  "settingsLoading": "加载中...",
+  "settingsError": "错误",
+  "settingsThemeLight": "浅色",
+  "settingsThemeDark": "深色",
+  "settingsNotificationDesc": "管理通知提醒",
+  "settingsSoundDesc": "管理声音和振动",
+  "settingsThemeSystem": "跟随系统",
+
   "loginWelcomeBack": "欢迎回来",
   "loginWeMissedYou": "我们想你了",
   "loginEmailHint": "邮箱地址",
@@ -88,6 +98,7 @@
   "loginButton": "登录",
   "loginNoAccount": "没有账号？注册",
   "loginContinueWith": "或者使用以下方式登录",
+
   "registerCreateAccount": "创建账号",
   "registerStartJourney": "开始你的学习之旅",
   "registerEmailHint": "邮箱地址",
@@ -106,5 +117,16 @@
         "type": "String"
       }
     }
-  }
+  },
+  "profileStats": "学习统计",
+  "profileStudyTime": "学习时长",
+  "profileTasks": "完成任务",
+  "profilePoints": "积分",
+  "profileStreak": "连续学习",
+  "profileInfo": "个人信息",
+  "profileUsername": "用户名",
+  "profileEmail": "邮箱",
+  "profilePhone": "手机号",
+  "profileNotSet": "未设置",
+  "profileError": "加载失败"
 } 
