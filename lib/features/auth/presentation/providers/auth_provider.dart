@@ -13,7 +13,22 @@ final authProvider =
 class AuthNotifier extends StateNotifier<AsyncValue<User?>> {
   final AuthService _authService;
 
-  AuthNotifier(this._authService) : super(const AsyncValue.data(null));
+  AuthNotifier(this._authService) : super(const AsyncValue.data(null)) {
+    // 初始化时检查当前用户
+    final currentUser = _authService.getCurrentUser();
+    if (currentUser != null) {
+      state = AsyncValue.data(currentUser);
+    }
+
+    // 监听认证状态变化
+    _authService.authStateChanges().listen((event) {
+      if (event.event == AuthChangeEvent.signedIn) {
+        state = AsyncValue.data(event.session?.user);
+      } else if (event.event == AuthChangeEvent.signedOut) {
+        state = const AsyncValue.data(null);
+      }
+    });
+  }
 
   bool get isAuthenticated => state.value != null;
 

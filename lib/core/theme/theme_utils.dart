@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 extension ColorX on Color {
   Color withOpacityValue(double opacity) {
@@ -22,6 +23,22 @@ class ThemeUtils {
 
   static Color getTextColor(bool isDark) {
     return isDark ? Colors.white : Colors.black;
+  }
+
+  static SystemUiOverlayStyle getSystemUiStyle(bool isDark) {
+    return isDark
+        ? const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarColor: Color(0xFF1c1917),
+            systemNavigationBarIconBrightness: Brightness.light,
+          )
+        : const SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarIconBrightness: Brightness.dark,
+            systemNavigationBarColor: Color(0xFFFFFBF5),
+            systemNavigationBarIconBrightness: Brightness.dark,
+          );
   }
 
   static TextStyle getTextStyle({

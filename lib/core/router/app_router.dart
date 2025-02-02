@@ -78,7 +78,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
         padding: EdgeInsets.only(
           left: 16,
           right: 16,
-          bottom: MediaQuery.of(context).padding.bottom + 16,
+          bottom: MediaQuery.of(context).padding.bottom + 8,
         ),
         alignment: Alignment.bottomCenter,
         child: GestureDetector(
@@ -178,7 +178,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 48,
+        width: 64,
         height: 48,
         alignment: Alignment.center,
         child: Stack(

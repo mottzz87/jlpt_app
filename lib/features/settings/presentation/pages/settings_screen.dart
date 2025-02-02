@@ -29,6 +29,7 @@ class SettingsScreen extends ConsumerWidget {
       enableDrag: true,
       builder: (context) => BottomSheetContent(
         title: l10n.settingsLanguage,
+        showTitle: false,
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -80,6 +81,20 @@ class SettingsScreen extends ConsumerWidget {
       error: (_, __) => false,
     );
 
+    // 根据语言代码获取国旗表情
+    String flag = '';
+    switch (languageCode) {
+      case 'zh':
+        flag = '🇨🇳';
+        break;
+      case 'en':
+        flag = '🇺🇸';
+        break;
+      case 'ja':
+        flag = '🇯🇵';
+        break;
+    }
+
     return GestureDetector(
       onTap: () async {
         await notifier.setLocale(Locale(languageCode));
@@ -88,7 +103,7 @@ class SettingsScreen extends ConsumerWidget {
         }
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: isSelected
               ? ThemeUtils.withOpacity(textColor, 0.1)
@@ -97,12 +112,17 @@ class SettingsScreen extends ConsumerWidget {
         ),
         child: Row(
           children: [
+            Text(
+              flag,
+              style: const TextStyle(fontSize: 24),
+            ),
+            const SizedBox(width: 12),
             Expanded(
               child: Text(
                 title,
                 style: ThemeUtils.getTextStyle(
                   isDark: isDark,
-                  fontSize: 12,
+                  fontSize: 16,
                   fontWeight: isSelected ? FontWeight.w500 : FontWeight.w400,
                 ),
               ),
@@ -111,7 +131,7 @@ class SettingsScreen extends ConsumerWidget {
               Icon(
                 Icons.check_circle,
                 color: textColor.withOpacityValue(0.6),
-                size: 14,
+                size: 20,
               ),
           ],
         ),
@@ -143,7 +163,7 @@ class SettingsScreen extends ConsumerWidget {
                   style: ThemeUtils.getTextStyle(
                     isDark: isDark,
                     opacity: 0.6,
-                    fontSize: 13,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -190,22 +210,19 @@ class SettingsScreen extends ConsumerWidget {
                               ? l10n.settingsThemeDark
                               : l10n.settingsThemeLight,
                       trailing: SizedBox(
-                        width: 96,
-                        height: 24,
+                        width: 120,
+                        height: 32,
                         child: SegmentedButton<ThemeMode>(
-                          segments: [
+                          segments: const [
                             ButtonSegment<ThemeMode>(
                               value: ThemeMode.light,
                               icon: SizedBox(
-                                width: 32,
-                                height: 24,
+                                width: 40,
+                                height: 32,
                                 child: Center(
-                                  child: Transform.translate(
-                                    offset: const Offset(0, -4),
-                                    child: const Icon(
-                                      Icons.light_mode,
-                                      size: 13,
-                                    ),
+                                  child: Icon(
+                                    Icons.light_mode,
+                                    size: 16,
                                   ),
                                 ),
                               ),
@@ -213,15 +230,12 @@ class SettingsScreen extends ConsumerWidget {
                             ButtonSegment<ThemeMode>(
                               value: ThemeMode.dark,
                               icon: SizedBox(
-                                width: 32,
-                                height: 24,
+                                width: 40,
+                                height: 32,
                                 child: Center(
-                                  child: Transform.translate(
-                                    offset: const Offset(0, -4),
-                                    child: const Icon(
-                                      Icons.dark_mode,
-                                      size: 13,
-                                    ),
+                                  child: Icon(
+                                    Icons.dark_mode,
+                                    size: 16,
                                   ),
                                 ),
                               ),
@@ -229,15 +243,12 @@ class SettingsScreen extends ConsumerWidget {
                             ButtonSegment<ThemeMode>(
                               value: ThemeMode.system,
                               icon: SizedBox(
-                                width: 32,
-                                height: 24,
+                                width: 40,
+                                height: 32,
                                 child: Center(
-                                  child: Transform.translate(
-                                    offset: const Offset(0, -4),
-                                    child: const Icon(
-                                      Icons.brightness_auto,
-                                      size: 13,
-                                    ),
+                                  child: Icon(
+                                    Icons.brightness_auto,
+                                    size: 16,
                                   ),
                                 ),
                               ),
@@ -323,7 +334,7 @@ class SettingsScreen extends ConsumerWidget {
                   style: ThemeUtils.getTextStyle(
                     isDark: isDark,
                     opacity: 0.6,
-                    fontSize: 13,
+                    fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

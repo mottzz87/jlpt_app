@@ -10,13 +10,18 @@ import 'core/services/supabase_service.dart';
 import 'core/theme/providers/locale_provider.dart';
 import 'core/theme/providers/theme_provider.dart';
 import 'core/theme/app_theme.dart';
+import 'core/theme/theme_utils.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await DatabaseService().initialize();
+  // 先初始化存储服务
   await StorageService().initialize();
+  // 然后初始化 Supabase（它依赖存储服务）
   await SupabaseService().initialize();
+  // 最后初始化数据库
+  await DatabaseService().initialize();
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -34,20 +39,7 @@ class MyApp extends ConsumerWidget {
             MediaQuery.platformBrightnessOf(context) == Brightness.dark);
 
     SystemChrome.setSystemUIOverlayStyle(
-      isDarkMode
-          ? SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.light,
-              systemNavigationBarColor: const Color(0xFF1c1917),
-              systemNavigationBarIconBrightness: Brightness.light,
-            )
-          : SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.dark,
-              systemNavigationBarColor: const Color(0xFFFFFBF5),
-              systemNavigationBarIconBrightness: Brightness.dark,
-            ),
-    );
+        ThemeUtils.getSystemUiStyle(isDarkMode));
 
     return MaterialApp.router(
       title: 'JLPT Study App',

@@ -4,11 +4,13 @@ import '../theme/theme_utils.dart';
 class BottomSheetContent extends StatelessWidget {
   final String title;
   final List<Widget> children;
+  final bool showTitle;
 
   const BottomSheetContent({
     super.key,
     required this.title,
     required this.children,
+    this.showTitle = true,
   });
 
   @override
@@ -35,20 +37,21 @@ class BottomSheetContent extends StatelessWidget {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Text(
-                  title,
-                  style: ThemeUtils.getTextStyle(
-                    isDark: isDark,
-                    fontWeight: FontWeight.w600,
+          if (showTitle)
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Text(
+                    title,
+                    style: ThemeUtils.getTextStyle(
+                      isDark: isDark,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
           Flexible(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),

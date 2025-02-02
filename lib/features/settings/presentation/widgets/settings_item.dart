@@ -40,7 +40,7 @@ class SettingItem extends StatelessWidget {
               bottom: isLast ? const Radius.circular(16) : Radius.zero,
             ),
             child: Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
                 vertical: 11,
               ).copyWith(
@@ -65,7 +65,7 @@ class SettingItem extends StatelessWidget {
                           title,
                           style: ThemeUtils.getTextStyle(
                             isDark: isDark,
-                            fontSize: 12,
+                            fontSize: 17,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -75,7 +75,7 @@ class SettingItem extends StatelessWidget {
                             subtitle ?? '',
                             style: ThemeUtils.getTextStyle(
                               isDark: isDark,
-                              fontSize: 10,
+                              fontSize: 13,
                               opacity: 0.6,
                               fontWeight: FontWeight.normal,
                             ),

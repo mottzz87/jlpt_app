@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'theme_utils.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {
@@ -8,11 +9,25 @@ class AppTheme {
       brightness: Brightness.light,
     );
 
+    final textTheme = GoogleFonts.notoSansTextTheme().copyWith(
+      titleMedium: GoogleFonts.notoSans(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      bodyMedium: GoogleFonts.notoSans(
+        fontSize: 14,
+      ),
+      bodySmall: GoogleFonts.notoSans(
+        fontSize: 12,
+        color: Colors.black54,
+      ),
+    );
+
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: const Color(0xFFFFFBF5),
-      textTheme: GoogleFonts.notoSansTextTheme(),
+      scaffoldBackgroundColor: ThemeUtils.getBackgroundColor(false),
+      textTheme: textTheme,
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
@@ -31,6 +46,10 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
+      ),
+      listTileTheme: ListTileThemeData(
+        titleTextStyle: textTheme.titleMedium,
+        subtitleTextStyle: textTheme.bodySmall,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -49,11 +68,26 @@ class AppTheme {
       brightness: Brightness.dark,
     );
 
+    final textTheme =
+        GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme).copyWith(
+      titleMedium: GoogleFonts.notoSans(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      bodyMedium: GoogleFonts.notoSans(
+        fontSize: 14,
+      ),
+      bodySmall: GoogleFonts.notoSans(
+        fontSize: 12,
+        color: Colors.white54,
+      ),
+    );
+
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: const Color(0xFF1c1917),
-      textTheme: GoogleFonts.notoSansTextTheme(ThemeData.dark().textTheme),
+      scaffoldBackgroundColor: ThemeUtils.getBackgroundColor(true),
+      textTheme: textTheme,
       appBarTheme: AppBarTheme(
         centerTitle: true,
         elevation: 0,
@@ -72,6 +106,10 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
+      ),
+      listTileTheme: ListTileThemeData(
+        titleTextStyle: textTheme.titleMedium,
+        subtitleTextStyle: textTheme.bodySmall,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
