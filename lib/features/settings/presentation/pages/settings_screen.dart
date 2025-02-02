@@ -152,10 +152,15 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: ThemeUtils.getBackgroundColor(isDark),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
         child: SafeArea(
+          bottom: false,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.only(left: 30, top: 20, bottom: 8),
                 child: Text(
@@ -447,6 +452,7 @@ class SettingsScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 16),
+              const SizedBox(height: 180),
             ],
           ),
         ),
